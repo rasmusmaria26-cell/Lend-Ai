@@ -1,0 +1,196 @@
+/* FINAL AESTHETIC CSS: Professional FinTech Dashboard with Animation */
+
+/* --- 1. KEYFRAMES FOR ANIMATION --- */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* General Layout & Typography */
+.App {
+    text-align: center;
+    /* Apply the animation properties */
+    background: linear-gradient(-45deg, #0D1117, #071032, #161B22, #0D1117); 
+    background-size: 400% 400%; /* Makes the gradient large enough to shift slowly */
+    animation: gradient-shift 35s ease infinite; /* 35 seconds, slow loop */
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #F0F6F9; 
+    font-family: 'Roboto', 'Arial', sans-serif; 
+    padding: 30px 15px;
+}
+
+/* Header & Connection Status */
+.App-header {
+    width: 100%;
+    max-width: 900px;
+}
+
+.App-header h1 {
+    font-size: 2.5rem;
+    color: #4CAF50; 
+    text-shadow: 0 0 5px rgba(0, 255, 196, 0.5); 
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.App-header p {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 25px;
+}
+
+.connect-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Main Content Layout (Side-by-Side Dashboard) */
+.main-content-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 25px; 
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+}
+
+/* 🟢 AI STATUS CARD - NEON GLOW FOCUS 🟢 */
+.ai-status-card {
+    background: #1e1e1e;
+    padding: 30px 20px;
+    border-radius: 12px;
+    min-width: 250px; 
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #00C4FF; 
+    box-shadow: 0 0 15px rgba(0, 196, 255, 0.4), 0 0 5px #00C4FF; 
+    flex-grow: 1;
+    transition: transform 0.3s ease;
+}
+
+.ai-status-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 20px rgba(0, 196, 255, 0.6);
+}
+
+.status-label {
+    font-size: 1rem;
+    color: #bdbdbd;
+    margin-bottom: 15px; 
+    font-weight: 500;
+}
+
+.score-display-group {
+    display: flex;
+    align-items: flex-end;
+    line-height: 1;
+}
+
+.score-value {
+    font-size: 5.5rem; 
+    color: #CCFF00; 
+    text-shadow: 0 0 8px rgba(204, 255, 0, 0.8); 
+    font-weight: 800; 
+    margin-right: 5px; 
+}
+
+.score-max {
+    font-size: 1.5rem;
+    color: #757575;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Application Form Card */
+.application-card {
+    background: #161B22;
+    padding: 25px; 
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    flex-grow: 2;
+}
+
+.application-card h3 {
+    color: #00FFC4; 
+    margin-top: 0;
+    border-bottom: 1px solid #282828;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.input-group label {
+    font-weight: 400;
+    color: #bdbdbd;
+    min-width: 120px;
+    text-align: left;
+}
+
+.input-group input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #3d455d;
+    background-color: #2b2b2b;
+    color: #f8f8f2;
+    width: 60%;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #00C4FF; 
+    box-shadow: 0 0 5px rgba(0, 196, 255, 0.5);
+    outline: none;
+}
+
+.application-card button[type="submit"] {
+    padding: 15px 30px;
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease;
+}
+
+.application-card button[type="submit"]:hover:not(:disabled) {
+    background-color: #43a047;
+}
+
+.application-card button[type="submit"]:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .main-content-container {
+        flex-direction: column;
+    }
+    .ai-status-card, .application-card {
+        width: 100%;
+        max-width: none;
+    }
+}

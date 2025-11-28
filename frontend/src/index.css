@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .glass-panel {
+        @apply bg-slate-900/40 backdrop-blur-xl border border-white/10 shadow-xl;
+    }
+
+    .glass-input {
+        @apply bg-slate-800/30 border border-slate-700/50 focus:border-cyan-400/50 focus:bg-slate-800/50 focus:ring-1 focus:ring-cyan-400/20 transition-all duration-300 outline-none;
+    }
+
+    .text-glow {
+        text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.delay-100 {
+    animation-delay: 100ms;
+}
+
+.delay-200 {
+    animation-delay: 200ms;
+}
+
+.delay-300 {
+    animation-delay: 300ms;
+}

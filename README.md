@@ -45,21 +45,24 @@ LendAI is a decentralized lending platform that leverages AI to provide dynamic 
 
 1.  **Start Local Node**
     ```bash
+    cd smart-contracts
     npx hardhat node
     ```
 
 2.  **Deploy Contracts**
     ```bash
+    # In a new terminal (inside smart-contracts folder)
     npx hardhat run scripts/deploy.js --network localhost
     ```
 
 3.  **Start Oracle & Frontend**
     ```bash
     # Terminal 1: Oracle
-    node backend_oracle.js
+    cd oracle-service
+    node index.js
 
     # Terminal 2: Frontend
-    cd frontend
+    cd ../frontend
     npm start
     ```
 

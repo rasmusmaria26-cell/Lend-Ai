@@ -18,8 +18,9 @@ warnings.filterwarnings('ignore')
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-MODEL_PATH = 'risk_model.joblib'
-SCALER_PATH = 'scaler.joblib'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, 'risk_model.joblib')
+SCALER_PATH = os.path.join(BASE_DIR, 'scaler.joblib')
 
 # --- 1. Model Training & Persistence ---
 def train_and_save_model():

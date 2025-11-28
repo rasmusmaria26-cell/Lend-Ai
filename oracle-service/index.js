@@ -1,3 +1,18 @@
+const axios = require('axios');
+const { ethers } = require('ethers');
+const fs = require('fs');
+const { exec } = require('child_process');
+require('dotenv').config();
+
+// Mock Constants for Verification
+const RPC_URL = "http://127.0.0.1:8545";
+const ORACLE_PRIVATE_KEY = "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"; // Hardhat Account #1 (Trusted Oracle)
+const CONTRACT_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // LendingPlatform Address
+const BORROWER_ADDRESS = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"; // Hardhat Account #1
+const TEST_PRINCIPAL = 10;
+const TEST_TENURE = 12;
+const TEST_COLLATERAL = 5;
+const TEST_COLLATERAL_TYPE = 'ETH';
 
 function getMlRiskScore(principal, tenure, collateral, ethPriceUsd, ethPriceInr) {
     return new Promise((resolve, reject) => {
@@ -21,7 +36,7 @@ function getMlRiskScore(principal, tenure, collateral, ethPriceUsd, ethPriceInr)
             effectiveCollateralEth = collateral / ethPriceUsd;
         }
 
-        const command = `python ./ai_risk_model.py ${BORROWER_ADDRESS} ${principal} ${tenure} ${effectiveCollateralEth} ${ethPriceUsd} ${ethPriceInr}`;
+        const command = `python ../ai-risk-model/ai_risk_model.py ${BORROWER_ADDRESS} ${principal} ${tenure} ${effectiveCollateralEth} ${ethPriceUsd} ${ethPriceInr}`;
 
         exec(command, (error, stdout, stderr) => {
             if (error) {
@@ -85,13 +100,14 @@ async function setRiskScore() {
         const dynamicScore = await getMlRiskScore(TEST_PRINCIPAL, TEST_TENURE, TEST_COLLATERAL, prices.usd, prices.inr);
 
         console.log(`Dynamic Score retrieved from ML Model: ${dynamicScore}`);
+        console.log("Waiting for transaction confirmation...");
 
         // --- 2. Submit Score to Blockchain ---
 
         const provider = new ethers.JsonRpcProvider(RPC_URL);
         const signer = new ethers.Wallet(ORACLE_PRIVATE_KEY, provider);
 
-        const artifactPath = './artifacts/contracts/LendingPlatform.sol/LendingPlatform.json';
+        const artifactPath = '../smart-contracts/artifacts/contracts/LendingPlatform.sol/LendingPlatform.json';
         const artifact = JSON.parse(fs.readFileSync(artifactPath, 'utf8'));
         const contract = new ethers.Contract(CONTRACT_ADDRESS, artifact.abi, signer);
 
